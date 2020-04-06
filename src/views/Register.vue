@@ -85,7 +85,7 @@
         button.btn.waves-effect.waves-light.auth__submit(type="submit") Зарегистрироваться
           i.material-icons.right send
 
-      p.center Уже есть аккаунт?
+      p.center Уже есть аккаунт? 
         router-link(to="/login") Войти!
 </template>
 
@@ -109,11 +109,11 @@ export default {
     confirmPassword: { required, sameAs: sameAs('password') },
     firstName: { required, maxLength: maxLength(50) },
     lastName: { required, maxLength: maxLength(50) },
-    agree: { check: v => v },
+    agree: { checked: v => v },
     dateBirth: { required }
   },
   methods: {
-    async submitHandler() { 
+    submitHandler() { 
       if (this.$v.$invalid) {
         this.$v.$touch()
         return
