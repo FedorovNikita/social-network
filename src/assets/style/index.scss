@@ -1,0 +1,35 @@
+// vars
+$bg-color: #fbebea;
+$font-color: #2e2829;
+
+// styles
+.container {
+  width: 960px;
+  margin: 0 auto;
+}
+
+.empty-layout {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+}
+
+.main-layout__wrapper {
+  display: flex;
+}
+
+.main-content {
+  width: calc(100% - 200px);
+  margin-left: 15px;
+}
+
+@import 'scaffolding';
+@import 'components/posts';
+@import 'components/auth';
+@import 'components/navbar';
+@import 'components/sidebar';
+
+
+
+
+

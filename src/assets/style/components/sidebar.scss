@@ -1,0 +1,23 @@
+.sidebar__list {
+  width: 200px;
+  margin: 0;
+}
+
+.sidebar__item {
+  width: 100%;
+  &--active {
+    border-right: 5px solid #4caf50;
+  }
+}
+
+
+
+.sidebar__link {
+  display: block;
+  padding: 16px 32px;
+
+  color: rgba(0, 0, 0, .87);
+  font-size: 14px;
+  font-weight: 500;
+}
+

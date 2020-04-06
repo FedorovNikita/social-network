@@ -1,5 +1,7 @@
 <template lang="pug">
-  p lorem
+  div
+    .page-title
+      h3 Моя стр
 </template>
 
 <script>

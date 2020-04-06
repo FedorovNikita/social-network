@@ -1,0 +1,19 @@
+.navbar {
+  background-color: #4caf50;
+  padding: 0 20px;
+}
+
+.navbar__list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar__link {
+  display: flex;
+  align-items: center;
+}
+
+.navbar__icon {
+  color: #4caf50;
+}
