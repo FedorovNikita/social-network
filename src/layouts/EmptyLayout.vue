@@ -12,3 +12,20 @@
           p.posts__text Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos ipsa, dolores laboriosam soluta repellendus numquam molestiae dicta possimus fugit rerum?
     router-view
 </template>
+
+<script>
+import messages from '@/utils/messages'
+
+export default {
+  computed: {
+    error() {
+      return this.$store.getters.error
+    }
+  },
+  watch: {
+    error(fbError) {
+      this.$error(messages[fbError.code] || 'Что-то пошло не так')
+    }
+  }
+}
+</script>
