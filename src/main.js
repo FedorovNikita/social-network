@@ -5,6 +5,7 @@ import router from './router'
 import store from './store'
 
 import messagePlugin from '@/utils/message.plugin'
+import Loader from "@/components/app/Loader"
 
 import './registerServiceWorker'
 import 'materialize-css/dist/js/materialize.min'
@@ -17,6 +18,7 @@ Vue.config.productionTip = false
 
 Vue.use(messagePlugin)
 Vue.use(Vuelidate)
+Vue.component('Loader', Loader)
 
 firebase.initializeApp({
   apiKey: "AIzaSyAcYNY-cXwFO-JltCXUwwMDW95FDY-OFEE",

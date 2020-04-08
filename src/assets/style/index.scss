@@ -24,6 +24,7 @@ $font-color: #2e2829;
 }
 
 @import 'scaffolding';
+@import 'components/loader';
 @import 'components/posts';
 @import 'components/auth';
 @import 'components/navbar';
