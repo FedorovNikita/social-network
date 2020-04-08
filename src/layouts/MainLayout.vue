@@ -16,7 +16,11 @@ import Sidebar from '@/components/app/Sidebar'
 
 export default {
   name: 'main-layout',
-  
+  async mounted() {
+    if(!Object.keys(this.$store.getters.info).length) {
+      await this.$store.dispatch('fetchInfo')
+    }
+  },
   components: {
     Navbar, Sidebar
   }
