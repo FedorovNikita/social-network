@@ -1,5 +1,5 @@
 <template lang="pug">
-  .main-layout
+  .main-layout.bg-main
     Navbar
 
     .main-layout__wrapper.container
@@ -37,3 +37,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .bg-main {
+    background-image: url('../assets/img/bg-main.svg');
+    background-repeat: no-repeat;
+  }
+</style>
