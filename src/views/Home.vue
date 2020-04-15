@@ -1,5 +1,5 @@
 <template lang="pug">
-  div
+  .container-component
     .page-title
       h3 Моя стр
 </template>

@@ -1,5 +1,5 @@
 <template lang="pug">
-  form.auth(@submit.prevent="submitHandler")
+  form.auth.container-component(@submit.prevent="submitHandler")
     .auth__content
       h2.auth__title Войти 
       .input-field
