@@ -36,7 +36,7 @@
           | Поле Дата рождения не должно быть пустым
 
       button.btn.waves-effect.waves-light(type="submit") Обновить
-        i.material-icons.right send
+        i.material-icons.right near_me
 </template>
 
 <script>
@@ -63,7 +63,7 @@ export default {
       }
 
       try {
-        this.$store.dispatch('updateInfo', {
+        await this.$store.dispatch('updateInfo', {
           firstName: this.firstName,
           lastName: this.lastName,
           dateBirth: this.dateBirth
@@ -72,7 +72,10 @@ export default {
     }
 
   },
-  mounted() {
+  async mounted() {
+    if(!Object.keys(this.$store.getters.info).length) {
+      await this.$store.dispatch('fetchInfo')
+    }
     this.firstName = this.info.firstName
     this.lastName = this.info.lastName
     this.dateBirth = this.info.dateBirth

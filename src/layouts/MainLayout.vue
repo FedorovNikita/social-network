@@ -1,13 +1,15 @@
 <template lang="pug">
-  .main-layout.bg-main
-    Navbar
+  div
+    Loader(v-if="loading")
+    .main-layout.bg-main
+      Navbar
 
-    .main-layout__wrapper.container
-      Sidebar
+      .main-layout__wrapper.container
+        Sidebar
 
-      main.main-content
-        router-view
-      
+        main.main-content
+          router-view
+        
 </template>
 
 <script>
@@ -17,10 +19,15 @@ import messages from '@/utils/messages'
 
 export default {
   name: 'main-layout',
+  data: () => ({
+    loading: true
+  }),
   async mounted() {
     if(!Object.keys(this.$store.getters.info).length) {
       await this.$store.dispatch('fetchInfo')
     }
+
+    this.loading = false
   },
   computed: {
     error() {
