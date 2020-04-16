@@ -68,6 +68,7 @@ export default {
           lastName: this.lastName,
           dateBirth: this.dateBirth
         })
+        this.$message('Данные успешно изменены')
       } catch(e) {}
     }
 
