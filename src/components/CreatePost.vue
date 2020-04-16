@@ -46,6 +46,7 @@ export default {
         this.description = ''
         this.$v.$reset()
         this.$message('Новый пост успешно создан')
+        this.$emit('created', post)
       } catch(e) {}
 
     }
