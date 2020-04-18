@@ -6,7 +6,7 @@
     CreatePost(@created="addNewPost")
 
     Loader(v-if="loading")
-    //- p(v-else-if="!posts.length") Постов еще нет
+    p(v-else-if="!posts.length") Постов еще нет
     Post(v-else :posts="posts")
 </template>
 
@@ -22,6 +22,8 @@ export default {
   }),
   async mounted() {
     this.posts = await this.$store.dispatch('fetchPosts')
+    console.log(this.posts)
+
     this.loading = false
   },
   components: {
@@ -29,7 +31,7 @@ export default {
   },
   methods: {
     addNewPost(post) {
-      this.posts.unshift(post)
+      this.posts.push(post)
       console.log(this.posts)
     }
   }

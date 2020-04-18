@@ -1,10 +1,10 @@
 <template lang="pug">
   div
     .container-component(
-      v-for="post of posts"
+      v-for="post of posts.slice().reverse()"
       :key="post.id"
       :data-post="post.id")
-      | {{ post.description }}
+      | {{ post.description }} {{ new Date(post.datePost) }} {{ post.idAuthor}}
 </template>
 
 <script>
