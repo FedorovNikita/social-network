@@ -8,9 +8,7 @@
 
       CreateComment(:currentPost="post.id" @createdComment="addNewComment")
 
-      Loader(v-if="loading")
-      //- p(v-else-if="!comments.length") На стене пока нет ни одной записи
-      Comment(v-else :comments="comments")
+      Comment(:comments="post.comments" :newComment="comments")
 </template>
 
 <script>
@@ -25,8 +23,7 @@ export default {
     }
   },
   data: () => ({
-    comments: [],
-    loading: true,
+    comments: '' || {},
     currentPost: ''
   }),
   components: {
@@ -34,17 +31,8 @@ export default {
   },
   methods: {
     addNewComment(comment) {
-      this.comments.push(comment)
-      console.log(this.comments)
-      
+      this.comments = comment
     }
-  },
-  async mounted() {
-    // console.log(this.$refs.div.getAttribute('data-post'))
-    // this.comments = await this.$store.dispatch('fetchComments')
-    // console.log(this.posts)
-    console.log(this.posts)
-    this.loading = false
-  },
+  }
 }
 </script>

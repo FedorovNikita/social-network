@@ -1,22 +1,26 @@
 <template lang="pug">
   div
-    div(v-for="comment of comments"
+    div(v-for="comment of allComments"
       :key="comment.id"
       :data-comment="comment.id")
       | {{ comment.textComment }} {{ new Date(comment.dateComment) }} {{ comment.idAuthor}}
-
 </template>
 
 <script>
 export default {
-  props: {
-    comments: {
-      type: Array,
-      required: true
+  props: ['comments', 'newComment'],
+  data: () => ({
+    allComments: []
+  }), 
+  mounted() {
+    if(this.comments) {
+      this.allComments = this.comments;
     }
   },
-  // mounted() {
-  //   console.log(this.comments)
-  // }
+  watch: {
+    newComment() {
+      this.allComments.push(this.newComment)
+    }
+  }
 }
 </script>
