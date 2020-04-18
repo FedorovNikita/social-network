@@ -13,7 +13,7 @@ export default {
         throw e
       }
     },
-    async createPost({ commit, dispatch }, { datePost, description}) {
+    async createPost({ commit, dispatch }, { datePost, description }) {
       try {
         const uid = await dispatch('getUid')
         const post = await firebase.database().ref(`users/${uid}/posts`).push({datePost, description, idAuthor: uid})

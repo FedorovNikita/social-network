@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import auth from './auth'
 import info from './info'
 import post from './post'
+import comment from './comment'
 
 Vue.use(Vuex)
 
@@ -24,6 +25,6 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
-    auth, info, post
+    auth, info, post, comment
   }
 })

@@ -6,7 +6,7 @@
     CreatePost(@created="addNewPost")
 
     Loader(v-if="loading")
-    p(v-else-if="!posts.length") Постов еще нет
+    p(v-else-if="!posts.length") На стене пока нет ни одной записи
     Post(v-else :posts="posts")
 </template>
 
@@ -22,7 +22,7 @@ export default {
   }),
   async mounted() {
     this.posts = await this.$store.dispatch('fetchPosts')
-    console.log(this.posts)
+    // console.log(this.posts)
 
     this.loading = false
   },
@@ -32,7 +32,6 @@ export default {
   methods: {
     addNewPost(post) {
       this.posts.push(post)
-      console.log(this.posts)
     }
   }
 }

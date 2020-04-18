@@ -23,6 +23,8 @@ body {
   font-style: normal;
 
   background-color: $bg-color;
+
+  overflow: visible !important;
 }
 
 img {
