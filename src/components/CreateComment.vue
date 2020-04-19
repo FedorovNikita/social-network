@@ -35,7 +35,6 @@ export default {
         this.$v.$touch()
         return
       }
-
       try {
         const comment = await this.$store.dispatch('createComment', {
           dateComment: new Date().toJSON(),
@@ -43,11 +42,12 @@ export default {
           idCurrentPost: this.currentPost
         })
 
-        // console.log(comment)
+        console.log(comment)
 
         this.comment = ''
         this.$v.$reset()
         this.$message('Новый комментарий успешно создан')
+
         this.$emit('createdComment', comment)
       } catch(e) {}
     }

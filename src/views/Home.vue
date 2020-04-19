@@ -7,7 +7,8 @@
 
     Loader(v-if="loading")
     p(v-else-if="!posts.length") На стене пока нет ни одной записи
-    Post(v-else :posts="posts")
+    div(v-else)
+      Post(v-for="post in posts.slice().reverse()" :key="post.id"  :post="post")
 </template>
 
 <script>

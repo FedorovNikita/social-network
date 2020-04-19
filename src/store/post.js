@@ -6,15 +6,7 @@ export default {
       try {
         const uid = await dispatch('getUid')
         const posts = (await firebase.database().ref(`users/${uid}/posts`).once('value')).val() || {}
-        const newPosts = Object.keys(posts).map(key => ({ ...posts[key], id: key}))
-        // console.log(newPosts)
-        for (let i = 0; i < newPosts.length; i++) {
-          if(newPosts[i].comments) {
-            newPosts[i].comments = Object.keys(newPosts[i].comments).map(key => ({ ...newPosts[i].comments[key], id: key}))
-          }
-        }
-
-        return newPosts
+        return Object.keys(posts).map(key => ({...posts[key], id: key}))
       } catch(e) {
         commit('setError', e)
         throw e
