@@ -25,6 +25,7 @@ export default {
   },
   async mounted() {
     this.comments = await this.$store.dispatch('fetchComments', {idCurrentPost: this.post.id})
+    // console.log(this.comments)
   },
   methods: {
     addNewComment(comment) {

@@ -14,7 +14,7 @@
         | Слишком много символов
     
     div
-      button.btn.waves-effect.waves-light.auth__submit(type="submit") Опубликовать
+      button.btn.waves-effect.waves-light.auth__submit(type="submit") Отправить новый коммент
         i.material-icons.right send
 </template>
 
@@ -41,8 +41,6 @@ export default {
           textComment: this.comment,
           idCurrentPost: this.currentPost
         })
-
-        console.log(comment)
 
         this.comment = ''
         this.$v.$reset()
