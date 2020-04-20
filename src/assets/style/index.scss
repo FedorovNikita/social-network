@@ -31,9 +31,18 @@ $font-color: #2e2829;
   box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
 }
 
+.character-counter {
+  color: #939393;
+}
+
+.input-field {
+  margin: 0;
+}
+
 @import 'scaffolding';
 @import 'components/loader';
 @import 'components/posts';
+@import 'components/comment';
 @import 'components/auth';
 @import 'components/navbar';
 @import 'components/sidebar';

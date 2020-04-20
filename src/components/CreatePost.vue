@@ -15,9 +15,9 @@
           v-else-if="$v.description.$dirty && !$v.description.maxLength")
           | Слишком много символов
       
-      div
-        button.btn.waves-effect.waves-light.auth__submit(type="submit") Опубликовать
-          i.material-icons.right send
+      
+      button.btn.waves-effect.waves-light.auth__submit(type="submit") Опубликовать
+        i.material-icons.right send
 </template>
 
 <script>

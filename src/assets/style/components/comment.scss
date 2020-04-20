@@ -1,0 +1,37 @@
+.comment {
+  padding: 10px 0;
+  border-top: 1px solid #e7e8ec;
+}
+
+.comment__title {
+  margin: 0;
+  font-size: 16px;
+}
+
+.comment__text {
+  margin: 0;
+  padding: 10px 0;
+  font-size: 16px;
+}
+
+.comment__date {
+  color: #939393;
+  font-size: 12px;
+}
+
+.comment__link {
+  font-size: 14px;
+  color: #4caf50;
+}
+
+.comment__attached {
+  margin-left: 50px;
+  padding: 10px 0;
+}
+
+.attached__border{
+  border-bottom: 1px solid #e7e8ec;
+  &:last-child {
+    border: none;
+  }
+}

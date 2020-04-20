@@ -1,9 +1,11 @@
 <template lang="pug">
-  div
-    h4 Автор коммента {{ comment.idAuthor}}
-    p Тект коммента {{ comment.textComment }}
-    span Дата публикации {{ comment.dateComment }}
-    small id коммента {{ comment.id }} {{comment.idCurrentPost}}
+  .comment
+    h4.comment__title Nikita Fedorov
+      //- | {{ comment.idAuthor}}
+    p.comment__text {{ comment.textComment }}
+    span.comment__date {{ comment.dateComment }}
+    
+    //- small id коммента {{ comment.id }} {{comment.idCurrentPost}}
 
     CreateAttachedComment(:idCurrentComment="comment.id" :idCurrentPost="comment.idCurrentPost" @createdAttachedComment="addNewAttachedComment")
     AttachedComment(v-for="attachedComment in attachedComments" :key="attachedComment.id" :attachedComment="attachedComment")

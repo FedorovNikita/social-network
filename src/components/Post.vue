@@ -1,14 +1,17 @@
 <template lang="pug">
-  div
-    .container-component
-      h4 автор {{post.idAuthor}}
-      span Дата публикации {{post.datePost}}
-      p текст поста{{post.description}}
-      small id поста {{post.id}}
+  .container-component.post
+    h4.post__title Никита Федоров 
+      //- | {{post.idAuthor}}
+    span.post__date 20 марта 2020 
+      //- | {{post.datePost}}
+    p.post__description {{post.description}}
+    //- small id поста {{post.id}}
 
-      CreateComment(:currentPost="post.id" @createdComment="addNewComment")
-      
-      Comment(v-for="comment in comments" :key="comment.id" :comment="comment")
+    //- hr
+
+    Comment(v-for="comment in comments" :key="comment.id" :comment="comment")
+    
+    CreateComment(:currentPost="post.id" @createdComment="addNewComment")
 </template>
 
 <script>

@@ -1,13 +1,13 @@
 <template lang="pug">
   div
-    | Ответить
+    a.comment__link(href="#" @click.prevent="isOpen = !isOpen") Ответить
 
-    form(@submit.prevent="submitHandler")
+    form.comment__attached(@submit.prevent="submitHandler" v-if="isOpen")
       .input-field
         textarea.materialize-textarea(
           v-model="comment" 
           id="commentAttached" )
-        label(for="commentAttached") Ответить
+        label(for="commentAttached") Написать комментарий...
         
         small.helper-text.invalid(
           v-if="$v.comment.$dirty && !$v.comment.required")
@@ -17,7 +17,7 @@
           | Слишком много символов
       
       div
-        button.btn.waves-effect.waves-light.auth__submit(type="submit") Ответить
+        button.btn.waves-effect.waves-light.auth__submit(type="submit") Отправить
           i.material-icons.right send
 </template>
 
@@ -28,7 +28,8 @@ import { required, maxLength } from 'vuelidate/lib/validators'
 export default {
   props: ['idCurrentComment', 'idCurrentPost'],
   data: () => ({
-    comment: ''
+    comment: '',
+    isOpen: false
   }),
   validations: {
     comment: { required, maxLength: maxLength(5000) }
@@ -54,6 +55,7 @@ export default {
         this.$message('Новый комментарий успешно создан')
 
         this.$emit('createdAttachedComment', comment)
+        this.isOpen = false;
       } catch(e) {}
     }
   }

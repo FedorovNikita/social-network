@@ -1,10 +1,10 @@
 <template lang="pug">
-  div
-    | Вложенный коммент
-    h4 Автор коммента {{ attachedComment.idAuthor}}
-    p Тект коммента {{ attachedComment.textComment }}
-    span Дата публикации {{ attachedComment.dateComment }}
-    small id коммента {{ attachedComment.id }} {{attachedComment.idCurrentPost}} {{attachedComment.idCurrentComment}}
+  .comment__attached.attached__border
+    h4.comment__title Иван Иванов 
+      //- | {{ attachedComment.idAuthor}}
+    p.comment__text {{ attachedComment.textComment }}
+    span.comment__date {{ attachedComment.dateComment }}
+    //- small id коммента {{ attachedComment.id }} {{attachedComment.idCurrentPost}} {{attachedComment.idCurrentComment}}
 </template>
 
 <script>
