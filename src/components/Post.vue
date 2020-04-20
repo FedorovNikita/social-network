@@ -1,11 +1,8 @@
 <template lang="pug">
   .container-component.post
-    h4.post__title Никита Федоров 
-      //- | {{post.idAuthor}}
+    h4.post__title {{userInfo.firstName}} {{userInfo.lastName}}
     span.post__date {{new Date(post.datePost) | date('datetime')}}
-      //- | {{post.datePost}}
     p.post__description {{post.description}}
-    //- small id поста {{post.id}}
 
     Comment(v-for="comment in comments" :key="comment.id" :comment="comment")
     
@@ -19,12 +16,16 @@ import Comment from '@/components/Comment'
 export default {
   props: ['post'],
   data: () => ({
-    comments: []
+    comments: [],
+    userInfo: ''
   }),
   components: {
     CreateComment, Comment
   },
   async mounted() {
+    this.userInfo = await this.$store.dispatch('fetchUser', {
+      idUser: this.post.idAuthor
+    })
     this.comments = await this.$store.dispatch('fetchComments', {
       idCurrentPost: this.post.id,
       uid: this.$route.params.id

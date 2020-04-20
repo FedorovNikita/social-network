@@ -1,11 +1,8 @@
 <template lang="pug">
   .comment
-    h4.comment__title Nikita Fedorov
-      //- | {{ comment.idAuthor}}
+    h4.comment__title {{userInfo.firstName}} {{userInfo.lastName}}
     p.comment__text {{ comment.textComment }}
     span.comment__date {{ comment.dateComment | date('datetime') }}
-    
-    //- small id коммента {{ comment.id }} {{comment.idCurrentPost}}
 
     CreateAttachedComment(:idCurrentComment="comment.id" :idCurrentPost="comment.idCurrentPost" @createdAttachedComment="addNewAttachedComment")
     AttachedComment(v-for="attachedComment in attachedComments" :key="attachedComment.id" :attachedComment="attachedComment")
@@ -18,12 +15,16 @@ import AttachedComment from '@/components/AttachedComment'
 export default {
   props: ['comment'],
   data: () => ({
-    attachedComments: []
+    attachedComments: [],
+    userInfo: ''
   }),
   components: {
     CreateAttachedComment, AttachedComment
   },
   async mounted() {
+    this.userInfo = await this.$store.dispatch('fetchUser', {
+      idUser: this.comment.idAuthor
+    })
     this.attachedComments = await this.$store.dispatch('fetchAttachedComments', {  
       idCurrentPost: this.comment.idCurrentPost, 
       idCurrentComment: this.comment.id,

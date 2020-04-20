@@ -2,7 +2,7 @@ import firebase from 'firebase/app'
 
 export default {
   actions: {
-    async fetchComments({ commit, dispatch }, { idCurrentPost, uid }) {
+    async fetchComments({ commit }, { idCurrentPost, uid }) {
       try {
         const comments = (await firebase.database().ref(`users/${uid}/posts/${idCurrentPost}/comments`).once('value')).val() || {}
         
@@ -12,7 +12,7 @@ export default {
         throw e
       }
     },
-    async fetchAttachedComments({ commit, dispatch }, { idCurrentPost, idCurrentComment, uid }) {
+    async fetchAttachedComments({ commit }, { idCurrentPost, idCurrentComment, uid }) {
       try {
         const comments = (await firebase.database().ref(`users/${uid}/posts/${idCurrentPost}/comments/${idCurrentComment}/attachedComments`).once('value')).val() || {}
         

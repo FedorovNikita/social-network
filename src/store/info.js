@@ -35,6 +35,10 @@ export default {
         commit('setError', e)
         throw e
       }
+    },
+    async fetchUser({}, {idUser}) {
+      const user = (await firebase.database().ref(`/users/${idUser}/info`).once('value')).val()
+      return user
     }
   },
   getters: {
