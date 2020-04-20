@@ -38,15 +38,18 @@ export default {
       }
 
       try {
-        const post = await this.$store.dispatch('createPost', {
-          datePost: new Date().toJSON(),
-          description: this.description
-        })
-
-        this.description = ''
-        this.$v.$reset()
-        this.$message('Новый пост успешно создан')
-        this.$emit('created', post)
+        const uid = this.$route.params.id
+        if(uid) {
+          const post = await this.$store.dispatch('createPost', {
+            datePost: new Date().toJSON(),
+            description: this.description,
+            uid
+          })
+          this.description = ''
+          this.$v.$reset()
+          this.$message('Новый пост успешно создан')
+          this.$emit('created', post)
+        }
       } catch(e) {}
 
     }

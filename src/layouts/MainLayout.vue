@@ -20,11 +20,14 @@ import messages from '@/utils/messages'
 export default {
   name: 'main-layout',
   data: () => ({
-    loading: true
+    loading: true,
+    // uid: ''
   }),
   async mounted() {
     if(!Object.keys(this.$store.getters.info).length) {
-      await this.$store.dispatch('fetchInfo')
+      const infoUid = await this.$store.dispatch('fetchInfo')
+      // this.uid = infoUid
+      // console.log(this.uid)
     }
 
     this.loading = false

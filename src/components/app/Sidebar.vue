@@ -1,5 +1,5 @@
 <template lang="pug">
-  ul.sidebar__list
+  ul.sidebar__list(:val="getUid")
     router-link(
       v-for="link in links"
       :key="link.url"
@@ -16,9 +16,20 @@
 export default {
   data: () => ({
     links: [
-      {title: 'Моя страница', url: '/', exact: true},
-      {title: 'Новости', url: '/news'}
+      {title: 'Новости', url: '/', exact: true},
     ]
-  })
+  }),
+  computed: {
+    getUid() {
+      const uid = this.$store.getters.info.uid
+      if(uid) {
+        const newLink = {
+          title: 'Моя страница',
+          url: `/profile/${uid}`
+        }
+        this.links.unshift(newLink)
+      }
+    }
+  }
 }
 </script>

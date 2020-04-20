@@ -12,6 +12,12 @@ const routes = [
     component: () => import('../views/Home.vue')
   },
   {
+    path: '/profile/:id',
+    name: 'profile',
+    meta: {layout: 'main', auth: true},
+    component: () => import('../views/Profile.vue')
+  },
+  {
     path: '/login',
     name: 'login',
     meta: {layout: 'empty'},
@@ -22,12 +28,6 @@ const routes = [
     name: 'register',
     meta: {layout: 'empty'},
     component: () => import('../views/Register.vue')
-  },
-  {
-    path: '/news',
-    name: 'news',
-    meta: {layout: 'main', auth: true},
-    component: () => import('../views/News.vue')
   },
   {
     path: '/settings',

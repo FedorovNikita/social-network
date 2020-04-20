@@ -24,7 +24,11 @@ export default {
     CreateAttachedComment, AttachedComment
   },
   async mounted() {
-    this.attachedComments = await this.$store.dispatch('fetchAttachedComments', { idCurrentPost: this.comment.idCurrentPost, idCurrentComment: this.comment.id })
+    this.attachedComments = await this.$store.dispatch('fetchAttachedComments', {  
+      idCurrentPost: this.comment.idCurrentPost, 
+      idCurrentComment: this.comment.id,
+      uid: this.$route.params.id
+    })
   },
   methods: {
     addNewAttachedComment(comment) {

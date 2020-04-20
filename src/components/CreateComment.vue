@@ -36,17 +36,21 @@ export default {
         return
       }
       try {
-        const comment = await this.$store.dispatch('createComment', {
-          dateComment: new Date().toJSON(),
-          textComment: this.comment,
-          idCurrentPost: this.currentPost
-        })
+        const uid = this.$route.params.id
+        if(uid) {
+          const comment = await this.$store.dispatch('createComment', {
+            dateComment: new Date().toJSON(),
+            textComment: this.comment,
+            idCurrentPost: this.currentPost,
+            uid
+          })
 
-        this.comment = ''
-        this.$v.$reset()
-        this.$message('Новый комментарий успешно создан')
+          this.comment = ''
+          this.$v.$reset()
+          this.$message('Новый комментарий успешно создан')
 
-        this.$emit('createdComment', comment)
+          this.$emit('createdComment', comment)
+        }
       } catch(e) {}
     }
   }

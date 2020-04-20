@@ -128,9 +128,8 @@ export default {
       }
 
       try {
-        console.log(formData)
-        await this.$store.dispatch('register', formData)
-        this.$router.push('/')
+        const uid = await this.$store.dispatch('register', formData)
+        this.$router.push('/profile/' + uid)
       } catch(e) {}
       
     }

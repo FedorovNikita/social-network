@@ -68,8 +68,8 @@ export default {
       }
 
       try {
-        await this.$store.dispatch('login', formData)
-        this.$router.push('/')
+        const uid = await this.$store.dispatch('login', formData)
+        this.$router.push('/profile/' + uid)
       } catch(e) {}
     }
   }

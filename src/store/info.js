@@ -28,7 +28,9 @@ export default {
       try {
         const uid = await dispatch('getUid')
         const info = (await firebase.database().ref(`/users/${uid}/info`).once('value')).val()
+        info.uid = uid
         commit('setInfo', info)
+        return uid
       } catch(e) {
         commit('setError', e)
         throw e

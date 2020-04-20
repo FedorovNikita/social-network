@@ -25,8 +25,10 @@ export default {
     CreateComment, Comment
   },
   async mounted() {
-    this.comments = await this.$store.dispatch('fetchComments', {idCurrentPost: this.post.id})
-    // console.log(this.post)
+    this.comments = await this.$store.dispatch('fetchComments', {
+      idCurrentPost: this.post.id,
+      uid: this.$route.params.id
+    })
   },
   methods: {
     addNewComment(comment) {

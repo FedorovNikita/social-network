@@ -2,9 +2,8 @@ import firebase from 'firebase/app'
 
 export default {
   actions: {
-    async fetchComments({ commit, dispatch }, { idCurrentPost }) {
+    async fetchComments({ commit, dispatch }, { idCurrentPost, uid }) {
       try {
-        const uid = await dispatch('getUid')
         const comments = (await firebase.database().ref(`users/${uid}/posts/${idCurrentPost}/comments`).once('value')).val() || {}
         
         return Object.keys(comments).map(key => ({...comments[key], id: key, idCurrentPost}))
@@ -13,9 +12,8 @@ export default {
         throw e
       }
     },
-    async fetchAttachedComments({ commit, dispatch }, { idCurrentPost, idCurrentComment }) {
+    async fetchAttachedComments({ commit, dispatch }, { idCurrentPost, idCurrentComment, uid }) {
       try {
-        const uid = await dispatch('getUid')
         const comments = (await firebase.database().ref(`users/${uid}/posts/${idCurrentPost}/comments/${idCurrentComment}/attachedComments`).once('value')).val() || {}
         
         return Object.keys(comments).map(key => ({...comments[key], id: key, idCurrentPost, idCurrentComment}))
@@ -24,23 +22,23 @@ export default {
         throw e
       }
     },
-    async createComment({ commit, dispatch }, { dateComment, textComment, idCurrentPost }) {
+    async createComment({ commit, dispatch }, { dateComment, textComment, idCurrentPost, uid }) {
       try {
-        const uid = await dispatch('getUid')
-        const comment = await firebase.database().ref(`users/${uid}/posts/${idCurrentPost}/comments`).push({dateComment, textComment, idAuthor: uid})
+        const idAuthor = await dispatch('getUid')
+        const comment = await firebase.database().ref(`users/${uid}/posts/${idCurrentPost}/comments`).push({dateComment, textComment, idAuthor})
 
-        return { dateComment, textComment, id: comment.key, idAuthor: uid, idCurrentPost }
+        return { dateComment, textComment, id: comment.key, idAuthor, idCurrentPost }
       } catch(e) {
         commit('setError', e)
         throw e
       }
     },
-    async createAttachedComment({ commit, dispatch }, { dateComment, textComment, idCurrentPost, idCurrentComment }) {
+    async createAttachedComment({ commit, dispatch }, { dateComment, textComment, idCurrentPost, idCurrentComment, uid }) {
       try {
-        const uid = await dispatch('getUid')
-        const comment = await firebase.database().ref(`users/${uid}/posts/${idCurrentPost}/comments/${idCurrentComment}/attachedComments`).push({dateComment, textComment, idAuthor: uid})
+        const idAuthor = await dispatch('getUid')
+        const comment = await firebase.database().ref(`users/${uid}/posts/${idCurrentPost}/comments/${idCurrentComment}/attachedComments`).push({dateComment, textComment, idAuthor})
 
-        return { dateComment, textComment, id: comment.key, idAuthor: uid, idCurrentPost, idCurrentComment }
+        return { dateComment, textComment, id: comment.key, idAuthor, idCurrentPost, idCurrentComment }
       } catch(e) {
         commit('setError', e)
         throw e
