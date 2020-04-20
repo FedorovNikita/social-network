@@ -3,7 +3,7 @@
     h4.comment__title Nikita Fedorov
       //- | {{ comment.idAuthor}}
     p.comment__text {{ comment.textComment }}
-    span.comment__date {{ comment.dateComment }}
+    span.comment__date {{ comment.dateComment | date('datetime') }}
     
     //- small id коммента {{ comment.id }} {{comment.idCurrentPost}}
 

@@ -2,12 +2,10 @@
   .container-component.post
     h4.post__title Никита Федоров 
       //- | {{post.idAuthor}}
-    span.post__date 20 марта 2020 
+    span.post__date {{new Date(post.datePost) | date('datetime')}}
       //- | {{post.datePost}}
     p.post__description {{post.description}}
     //- small id поста {{post.id}}
-
-    //- hr
 
     Comment(v-for="comment in comments" :key="comment.id" :comment="comment")
     
@@ -28,7 +26,7 @@ export default {
   },
   async mounted() {
     this.comments = await this.$store.dispatch('fetchComments', {idCurrentPost: this.post.id})
-    // console.log(this.comments)
+    // console.log(this.post)
   },
   methods: {
     addNewComment(comment) {
