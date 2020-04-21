@@ -1,0 +1,14 @@
+.setting__user-photo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.setting__user-image {
+  max-width: 500px;
+}
+
+.setting__btn {
+  display: flex;
+  margin: 0 0 0 auto;
+}

@@ -1,6 +1,6 @@
 <template lang="pug">
   .container-component
-    h3.page-title Редактировать 
+    h3 Редактировать 
 
     form.form(@submit.prevent="submitHandler")
       .input-field
@@ -34,13 +34,20 @@
         small.helper-text.invalid( 
           v-if="$v.dateBirth.$dirty && !$v.dateBirth.required")
           | Поле Дата рождения не должно быть пустым
-      .input-field.user-photo
-        label.user-photo__label Фото пользователя: 
-          input(name="myFile" @change="handleFileUpload" type="file" accept="image/{png, jpg, webp}")
-        div.user-photo__img 
-          img(:src="getUrl")
+      .input-field.setting__user-photo
+        <div class="file-field input-field">
+          <div class="btn">
+            <span>Изменить фото</span>
+            <input type="file" @change="handleFileUpload"  accept="image/{png, jpg, webp}">
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+          </div>
+        </div>
+        div.setting__user-image
+          img(:src="getUrl")  
 
-      button.btn.waves-effect.waves-light(type="submit") Обновить
+      button.btn.waves-effect.waves-light.setting__btn(type="submit") Обновить
         i.material-icons.right near_me
 </template>
 
