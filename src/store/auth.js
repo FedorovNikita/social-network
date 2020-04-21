@@ -19,7 +19,8 @@ export default {
         await firebase.database().ref(`/users/${uid}/info`).set({
           firstName,
           lastName,
-          dateBirth
+          dateBirth,
+          urlImg: 'https://firebasestorage.googleapis.com/v0/b/social-network-cafed.appspot.com/o/userDefault.png?alt=media&token=cc96c6a4-e657-402e-b613-fa6eaebb2f8b'
         })
         return uid
       } catch(e) {

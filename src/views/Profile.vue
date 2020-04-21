@@ -1,7 +1,14 @@
 <template lang="pug">
   div
-    .page-title.container-component
-      h3 Profile
+    div.user-info
+      .container-component.user-info__image
+        img(:src="userInfo.urlImg")
+      .container-component.user-info__desc
+        h3.user-info__name {{ userInfo.firstName }} {{ userInfo.lastName }}
+        table
+          tr.user-info__table-row
+            td.user-info__first-column.user-info__date День рождения:
+            td.user-info__date {{ userInfo.dateBirth | date('date') }}
 
     CreatePost(@created="addNewPost")
 
@@ -19,9 +26,13 @@ export default {
   name: 'Home',
   data: () => ({
     posts: [],
+    userInfo: [],
     loading: true
   }),
   async mounted() {
+    this.userInfo = await this.$store.dispatch('fetchUser', {
+      idUser: this.$route.params.id
+    })
     this.posts = await this.$store.dispatch('fetchPosts', {
       uid: this.$route.params.id
     })

@@ -1,0 +1,35 @@
+.user-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-info__image {
+  width: 230px;
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+.user-info__desc {
+  width: calc(100% - 230px);
+  margin-left: 20px;
+  align-self: flex-start;
+}
+
+.user-info__name {
+  margin: 0;
+  font-size: 20px;
+  line-height: 25px;
+}
+
+.user-info__table-row {
+  border: none
+}
+
+.user-info__first-column {
+  width: 160px;
+}
+
+.user-info__date {
+  color: #828282;
+  font-size: 13px;
+}
