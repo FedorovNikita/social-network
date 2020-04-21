@@ -14,6 +14,15 @@
   align-items: center;
 }
 
+.navbar__user-img {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  border-radius: 50%;
+
+  object-fit: cover;
+}
+
 .navbar__icon {
   color: #4caf50;
 }

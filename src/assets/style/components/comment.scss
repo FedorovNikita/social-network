@@ -13,6 +13,8 @@
   height: 50px;
   margin-right: 15px;
   border-radius: 50%;
+
+  object-fit: cover;
 }
 
 .comment__attached-user-img {
@@ -20,6 +22,8 @@
   height: 40px;
   margin-right: 15px;
   border-radius: 50%;
+
+  object-fit: cover;
 }
 
 .comment__title {

@@ -10,9 +10,26 @@ export default {
     },
     clearInfo(state) {
       state.info = {}
+    },
+    setSrc(state, src) {
+      state.info.urlImg = src
     }
   },
   actions: {
+    sendFile({commit, dispatch, getters}, file) {
+      let storageRef = firebase.storage().ref('userImages/' + file.name);
+      let uploadTask = storageRef.put(file);
+
+      uploadTask.on('state_changed', 
+        function(snapshot){}, 
+        function(error) {}, 
+        async function() {
+          await uploadTask.snapshot.ref.getDownloadURL()
+            .then( async (downloadURL) => {
+              await commit('setSrc', downloadURL)
+            });
+      });
+    },
     async updateInfo({ dispatch, commit, getters }, toUpdate) {
       try {
         const uid = await dispatch('getUid')

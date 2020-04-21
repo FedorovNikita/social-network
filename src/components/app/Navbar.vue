@@ -13,7 +13,8 @@
             href="#"
             data-target="dropdown"
             ref="dropdown")
-            | {{name}}
+            img.navbar__user-img(:src="user.urlImg")
+            | {{ user.firstName }}
             i.material-icons.right arrow_drop_down
 
           ul#dropdown.dropdown-content
@@ -43,8 +44,8 @@ export default {
     }
   },
   computed: {
-    name() {
-      return this.$store.getters.info.firstName
+    user() {
+      return this.$store.getters.info
     }
   },
   mounted() {

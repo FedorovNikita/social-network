@@ -34,6 +34,11 @@
         small.helper-text.invalid( 
           v-if="$v.dateBirth.$dirty && !$v.dateBirth.required")
           | Поле Дата рождения не должно быть пустым
+      .input-field.user-photo
+        label.user-photo__label Фото пользователя: 
+          input(name="myFile" @change="handleFileUpload" type="file" accept="image/{png, jpg, webp}")
+        div.user-photo__img 
+          img(:src="getUrl")
 
       button.btn.waves-effect.waves-light(type="submit") Обновить
         i.material-icons.right near_me
@@ -56,6 +61,10 @@ export default {
     dateBirth: { required }
   },
   methods: {
+    async handleFileUpload(e) {
+      let file = e.target.files[0];
+      await this.$store.dispatch('sendFile', file)
+    },
     async submitHandler() {
       if (this.$v.$invalid) {
         this.$v.$touch()
@@ -85,7 +94,10 @@ export default {
     }, 0);
   },
   computed: {
-    ...mapGetters(['info'])
+    ...mapGetters(['info']),
+    getUrl() {
+      return this.$store.getters.info.urlImg
+    }
   }
 }
 </script>

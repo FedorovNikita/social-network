@@ -17,17 +17,19 @@ export default {
   data: () => ({
     links: [
       {title: 'Новости', url: '/', exact: true},
-    ]
+    ],
+    linksCount: true
   }),
   computed: {
     getUid() {
       const uid = this.$store.getters.info.uid
-      if(uid) {
+      if(uid && this.linksCount) {
         const newLink = {
           title: 'Моя страница',
           url: `/profile/${uid}`
         }
         this.links.unshift(newLink)
+        this.linksCount = false
       }
     }
   }
