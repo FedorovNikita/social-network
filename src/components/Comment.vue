@@ -2,9 +2,12 @@
   div
     Loader(v-if="loading" style="height: 50px")
     .comment(v-else)
-      h4.comment__title {{userInfo.firstName}} {{userInfo.lastName}}
-      p.comment__text {{ comment.textComment }}
-      span.comment__date {{ comment.dateComment | date('datetime') }}
+      .comment__info
+        img.comment__user-img(:src="userInfo.urlImg")
+        div
+          h4.comment__title {{userInfo.firstName}} {{userInfo.lastName}}
+          p.comment__text {{ comment.textComment }}
+          span.comment__date {{ comment.dateComment | date('datetime') }}
 
       CreateAttachedComment(:idCurrentComment="comment.id" :idCurrentPost="comment.idCurrentPost" @createdAttachedComment="addNewAttachedComment")
       AttachedComment(v-for="attachedComment in attachedComments" :key="attachedComment.id" :attachedComment="attachedComment")

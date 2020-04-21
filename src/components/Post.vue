@@ -1,7 +1,10 @@
 <template lang="pug">
   .container-component.post
-    h4.post__title {{userInfo.firstName}} {{userInfo.lastName}}
-    span.post__date {{new Date(post.datePost) | date('datetime')}}
+    .post__info-author
+      img.post__user-img(:src="userInfo.urlImg")
+      div
+        h4.post__title {{userInfo.firstName}} {{userInfo.lastName}}
+        span.post__date {{new Date(post.datePost) | date('datetime')}}
     p.post__description {{post.description}}
 
     Comment(v-for="comment in comments" :key="comment.id" :comment="comment")
