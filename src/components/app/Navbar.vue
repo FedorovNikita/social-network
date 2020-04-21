@@ -5,9 +5,11 @@
         li.navbar__link
           a.navbar__link(href="#")
             i.material-icons home
-            span NF
+            span.navbar__logo 
+              i my
+              | Home
         li.navbar__link
-          a.navbar__link.dropdown-trigger.black-text(
+          a.navbar__link.dropdown-trigger(
             href="#"
             data-target="dropdown"
             ref="dropdown")

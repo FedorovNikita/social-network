@@ -1,11 +1,13 @@
 <template lang="pug">
-  .comment
-    h4.comment__title {{userInfo.firstName}} {{userInfo.lastName}}
-    p.comment__text {{ comment.textComment }}
-    span.comment__date {{ comment.dateComment | date('datetime') }}
+  div
+    Loader(v-if="loading" style="height: 50px")
+    .comment(v-else)
+      h4.comment__title {{userInfo.firstName}} {{userInfo.lastName}}
+      p.comment__text {{ comment.textComment }}
+      span.comment__date {{ comment.dateComment | date('datetime') }}
 
-    CreateAttachedComment(:idCurrentComment="comment.id" :idCurrentPost="comment.idCurrentPost" @createdAttachedComment="addNewAttachedComment")
-    AttachedComment(v-for="attachedComment in attachedComments" :key="attachedComment.id" :attachedComment="attachedComment")
+      CreateAttachedComment(:idCurrentComment="comment.id" :idCurrentPost="comment.idCurrentPost" @createdAttachedComment="addNewAttachedComment")
+      AttachedComment(v-for="attachedComment in attachedComments" :key="attachedComment.id" :attachedComment="attachedComment")
 </template>
 
 <script>
@@ -16,7 +18,8 @@ export default {
   props: ['comment'],
   data: () => ({
     attachedComments: [],
-    userInfo: ''
+    userInfo: [],
+    loading: true,
   }),
   components: {
     CreateAttachedComment, AttachedComment
@@ -28,8 +31,9 @@ export default {
     this.attachedComments = await this.$store.dispatch('fetchAttachedComments', {  
       idCurrentPost: this.comment.idCurrentPost, 
       idCurrentComment: this.comment.id,
-      uid: this.$route.params.id
+      uid: this.$route.params.id,
     })
+    this.loading = false
   },
   methods: {
     addNewAttachedComment(comment) {

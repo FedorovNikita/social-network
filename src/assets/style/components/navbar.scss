@@ -17,3 +17,13 @@
 .navbar__icon {
   color: #4caf50;
 }
+
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  font-size: 16px;
+  i {
+    font-size: 16px;
+  }
+}
