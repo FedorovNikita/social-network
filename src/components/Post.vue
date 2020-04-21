@@ -6,6 +6,7 @@
         h4.post__title {{userInfo.firstName}} {{userInfo.lastName}}
         span.post__date {{new Date(post.datePost) | date('datetime')}}
     p.post__description {{post.description}}
+    img(:src="post.srcImg")
 
     Comment(v-for="comment in comments" :key="comment.id" :comment="comment")
     
@@ -33,7 +34,7 @@ export default {
       idCurrentPost: this.post.id,
       uid: this.$route.params.id
     })
-    // console.log(this.post)
+    console.log(this.post)
   },
   methods: {
     addNewComment(comment) {

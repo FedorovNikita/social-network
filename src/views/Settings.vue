@@ -35,15 +35,12 @@
           v-if="$v.dateBirth.$dirty && !$v.dateBirth.required")
           | Поле Дата рождения не должно быть пустым
       .input-field.setting__user-photo
-        <div class="file-field input-field">
-          <div class="btn">
-            <span>Изменить фото</span>
-            <input type="file" @change="handleFileUpload"  accept="image/{png, jpg, webp}">
-          </div>
-          <div class="file-path-wrapper">
-            <input class="file-path validate" type="text">
-          </div>
-        </div>
+        .file-field.input-field
+          .btn
+            span Изменить фото
+            input(type="file" @change="handleFileUpload"  accept="image/{png, jpg, webp}")
+          .file-path-wrapper
+            input.file-path.validate(type="text")
         div.setting__user-image
           img(:src="getUrl")  
 

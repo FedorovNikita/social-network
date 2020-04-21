@@ -1,6 +1,6 @@
 <template lang="pug">
   .container-component
-    form(@submit.prevent="submitHandler")
+    form(@submit.prevent="submitHandler" ref="form")
       .input-field
         textarea.materialize-textarea(
           v-model="description" 
@@ -14,10 +14,17 @@
         small.helper-text.invalid( 
           v-else-if="$v.description.$dirty && !$v.description.maxLength")
           | Слишком много символов
-      
-      
-      button.btn.waves-effect.waves-light.auth__submit(type="submit") Опубликовать
-        i.material-icons.right send
+      .input-field.post__user-photo
+        div
+          img(:src="getSrc")
+        .file-field.input-field.post__btn-wrap
+          .file-path-wrapper
+            input.file-path.validate(type="text")
+          .btn.post__submit
+            span Добавить картинку
+            input(type="file" @change="handleFileUpload" accept="image/{png, jpg, webp}")
+          button.btn.waves-effect.waves-light.post__submit(type="submit") Опубликовать
+            i.material-icons.right send
 </template>
 
 <script>
@@ -25,12 +32,16 @@ import { required, maxLength } from 'vuelidate/lib/validators'
 
 export default {
   data: () => ({
-    description: ''
+    description: '',
   }),
   validations: {
     description: { required, maxLength: maxLength(15895) }
   },
   methods: {
+    async handleFileUpload(e) {
+      let file = e.target.files[0];
+      await this.$store.dispatch('sendPostFile', file)
+    },
     async submitHandler() {
       if (this.$v.$invalid) {
         this.$v.$touch()
@@ -47,12 +58,19 @@ export default {
           })
           this.description = ''
           this.$v.$reset()
+          this.$refs.form.reset()
+          this.$store.commit('clearPost')
           this.$message('Новый пост успешно создан')
           this.$emit('created', post)
         }
       } catch(e) {}
 
     }
-  }
+  },
+  computed: {
+    getSrc() {
+      return this.$store.getters.post.urlImg
+    }
+  },
 }
 </script>
