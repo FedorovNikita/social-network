@@ -34,7 +34,6 @@ export default {
       idCurrentPost: this.post.id,
       uid: this.$route.params.id
     })
-    console.log(this.post)
   },
   methods: {
     addNewComment(comment) {

@@ -1,10 +1,11 @@
 <template lang="pug">
   .container-component
-    form(@submit.prevent="submitHandler" ref="form")
+    form(@submit.prevent="submitHandler" ref="form" )
       .input-field
         textarea.materialize-textarea(
           v-model="description" 
-          id="description" )
+          id="description"
+          @click="btnIsOpen = !btnIsOpen")
         label(for="description") Что у Вас нового?
         span.character-counter( 
           style="float: right; font-size: 12px;") {{ description.length }}/{{ $v.description.$params.maxLength.max }}
@@ -14,7 +15,7 @@
         small.helper-text.invalid( 
           v-else-if="$v.description.$dirty && !$v.description.maxLength")
           | Слишком много символов
-      .input-field.post__user-photo
+      .input-field.post__user-photo(v-if="btnIsOpen")
         div
           img(:src="getSrc")
         .file-field.input-field.post__btn-wrap
@@ -33,6 +34,7 @@ import { required, maxLength } from 'vuelidate/lib/validators'
 export default {
   data: () => ({
     description: '',
+    btnIsOpen: false
   }),
   validations: {
     description: { required, maxLength: maxLength(15895) }
@@ -62,6 +64,7 @@ export default {
           this.$store.commit('clearPost')
           this.$message('Новый пост успешно создан')
           this.$emit('created', post)
+          this.btnIsOpen = false
         }
       } catch(e) {}
 
