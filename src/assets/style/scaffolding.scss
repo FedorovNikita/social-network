@@ -12,7 +12,6 @@
 }
 
 body {
-  min-width: 320px;
   margin: 0;
   padding: 0;
 
@@ -25,6 +24,9 @@ body {
   background-color: $bg-color;
 
   overflow: visible !important;
+
+  float: left;
+  min-width: 100%;
 }
 
 img {

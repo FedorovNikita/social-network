@@ -3,7 +3,7 @@
     .navbar__wrapper
       ul.navbar__list
         li.navbar__link
-          a.navbar__link(href="#")
+          router-link.navbar__link(to="/")
             i.material-icons home
             span.navbar__logo 
               i my
