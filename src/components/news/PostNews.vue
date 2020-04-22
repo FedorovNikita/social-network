@@ -10,10 +10,11 @@
     
     CommentNews(v-for="comment in comments" :key="comment.id" :comment="comment" :uid="post.uid")
 
-    CreateComment(:currentPost="post.id" @createdComment="addNewComment" :uid="post.uid")
+    CreateComment(v-if="currentUser" :currentPost="post.id" @createdComment="addNewComment" :uid="post.uid")
 </template>
 
 <script>
+import firebase from 'firebase/app'
 import CommentNews from '@/components/news/CommentNews'
 import CreateComment from '@/components/CreateComment'
 
@@ -22,6 +23,7 @@ export default {
   data: () => ({
     userInfo: '',
     comments: [],
+    currentUser: true
   }),
   async mounted() {
     if(this.post.comments) {
@@ -33,6 +35,9 @@ export default {
     this.userInfo = await this.$store.dispatch('fetchUser', {
       idUser: this.post.idAuthor
     })
+    if(!firebase.auth().currentUser) {
+      this.currentUser = false
+    }
   },
   methods: {
     addNewComment(comment) {

@@ -26,6 +26,7 @@ export default {
         this.posts.push(userPostsArr)
       }
     }
+    // console.log(this.posts)
   },
   components: {
     PostNews
