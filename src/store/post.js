@@ -22,6 +22,12 @@ export default {
     }
   },
   actions: {
+    async setLike({ dispatch }, { idCurrentPost, uid }) {
+      const idLiker = await dispatch('getUid')
+      const like = await firebase.database().ref(`users/${uid}/posts/${idCurrentPost}/likes`).push({uid: idLiker})
+
+      return {id: like.key, uid: idLiker, idCurrentPost }
+    },
     async sendPostFile({commit, dispatch, getters}, file) {
       const uid = await dispatch('getUid')
       const ts = uid + 'date' + Date.parse(new Date())

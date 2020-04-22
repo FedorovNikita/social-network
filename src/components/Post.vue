@@ -10,12 +10,20 @@
 
     <iframe v-if="videoIsOpen" width="100%" height="400" :src="`https://www.youtube.com/embed/${post.srcVideo}`" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+    div.likes
+      span.likes__thumb-up(@click="changeLike" v-if="likeIsOpen") 
+        i.material-icons thumb_up
+      span.likes__count
+        i.material-icons(:class="{likes__favorite: !likeIsOpen}") favorite
+        | {{ countLike }} 
+
     Comment(v-for="comment in comments" :key="comment.id" :comment="comment")
     
     CreateComment(:currentPost="post.id" @createdComment="addNewComment")
 </template>
 
 <script>
+import firebase from 'firebase/app'
 import CreateComment from '@/components/CreateComment'
 import Comment from '@/components/Comment'
 
@@ -24,12 +32,26 @@ export default {
   data: () => ({
     comments: [],
     userInfo: '',
-    videoIsOpen: false
+    videoIsOpen: false,
+    likeIsOpen: true,
+    countLike: ''
   }),
   components: {
     CreateComment, Comment
   },
   async mounted() {
+    if(this.post.likes) {
+      const uid = await this.$store.dispatch('getUid')
+      if(uid) {
+        const likesId = Object.keys(this.post.likes).map(key => ({...this.post.likes[key], id: key}))
+        for(let i = 0; i < likesId.length; i++) {
+          if(likesId[i].uid == uid) {
+            this.likeIsOpen = false
+          }
+        }
+        this.countLike = likesId.length
+      }
+    }
     if(this.post.srcVideo) {
       this.videoIsOpen = true
     }
@@ -44,6 +66,14 @@ export default {
   methods: {
     addNewComment(comment) {
       this.comments.push(comment)
+    },
+    async changeLike() {
+      const like = await this.$store.dispatch('setLike', {
+        idCurrentPost: this.post.id,
+        uid: this.$route.params.id
+      })
+      this.countLike += 1
+      this.likeIsOpen = false
     }
   }
 }

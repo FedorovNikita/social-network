@@ -35,6 +35,31 @@ $font-color: #2e2829;
   color: #939393;
 }
 
+.likes {
+  display: flex;
+}
+
+.likes i {
+  color: #adadad;
+  transition: all 0.4s;
+}
+
+.likes__thumb-up {
+  margin-right: 10px;
+  cursor: pointer;
+  &:hover i {
+    color: #4caf50;
+  }
+}
+
+.likes__count {
+  display: flex;
+}
+
+.likes__favorite {
+  color: #ff0000 !important;
+}
+
 @import 'scaffolding';
 @import 'components/loader';
 @import 'components/auth';
