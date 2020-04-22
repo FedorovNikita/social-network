@@ -36,7 +36,6 @@ export default {
     this.posts = await this.$store.dispatch('fetchPosts', {
       uid: this.$route.params.id
     })
-    // console.log(this.posts)
     this.loading = false
   },
   components: {

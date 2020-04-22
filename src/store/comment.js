@@ -2,6 +2,12 @@ import firebase from 'firebase/app'
 
 export default {
   actions: {
+    async setCommentLike({ dispatch }, { idCurrentPost, idCurrentComment, uid }) {
+      const idLiker = await dispatch('getUid')
+      const like = await firebase.database().ref(`users/${uid}/posts/${idCurrentPost}/comments/${idCurrentComment}/likes`).push({uid: idLiker})
+
+      return {id: like.key, uid: idLiker, idCurrentPost, idCurrentComment }
+    },
     async fetchComments({ commit }, { idCurrentPost, uid }) {
       try {
         const comments = (await firebase.database().ref(`users/${uid}/posts/${idCurrentPost}/comments`).once('value')).val() || {}
