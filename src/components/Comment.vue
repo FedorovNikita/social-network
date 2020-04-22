@@ -64,11 +64,6 @@ export default {
       this.attachedComments.push(comment)
     },
     async changeCommentLikes() {
-      // console.log('sdf')
-      // console.log(this.comment.idCurrentPost, 'idCurrentPost')
-      // console.log(this.comment.id, 'idCurrentComment')
-      // console.log(this.$route.params.id)
-
       const like = await this.$store.dispatch('setCommentLike', {
         idCurrentPost: this.comment.idCurrentPost,
         idCurrentComment: this.comment.id,
