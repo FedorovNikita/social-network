@@ -34,6 +34,12 @@ const routes = [
     name: 'settings',
     meta: {layout: 'main', auth: true},
     component: () => import('../views/Settings.vue')
+  },
+  {
+    path: '/users',
+    name: 'users',
+    meta: {layout: 'main', auth: true},
+    component: () => import('../views/Users.vue')
   }
 ]
 

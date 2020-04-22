@@ -1,0 +1,21 @@
+.users {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.users__wrap {
+  width: calc(100% / 3);
+  text-align: center;
+}
+
+.users__image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.users__name {
+  margin-top: 0;
+  font-size: 16px;
+  color: #000000;
+}

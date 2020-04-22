@@ -17,6 +17,7 @@ export default {
   data: () => ({
     links: [
       {title: 'Новости', url: '/', exact: true},
+      {title: 'Пользователи', url: '/users'},
     ],
     linksCount: true
   }),
