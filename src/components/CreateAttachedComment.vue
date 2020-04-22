@@ -26,7 +26,7 @@
 import { required, maxLength } from 'vuelidate/lib/validators'
 
 export default {
-  props: ['idCurrentComment', 'idCurrentPost'],
+  props: ['idCurrentComment', 'idCurrentPost', 'uid'],
   data: () => ({
     comment: '',
     isOpen: false
@@ -41,24 +41,42 @@ export default {
         return
       }
       try {
-        const uid = this.$route.params.id
-        if(uid) {
-          const comment = await this.$store.dispatch('createAttachedComment', {
-            dateComment: new Date().toJSON(),
-            textComment: this.comment,
-            idCurrentPost: this.idCurrentPost,
-            idCurrentComment: this.idCurrentComment,
-            uid
-          })
+        if(this.$route.params.id) {
+          const uid = this.$route.params.id
+          if(uid) {
+            const comment = await this.$store.dispatch('createAttachedComment', {
+              dateComment: new Date().toJSON(),
+              textComment: this.comment,
+              idCurrentPost: this.idCurrentPost,
+              idCurrentComment: this.idCurrentComment,
+              uid
+            })
 
-          // console.log(comment)
+            this.comment = ''
+            this.$v.$reset()
+            this.$message('Новый комментарий успешно создан')
 
-          this.comment = ''
-          this.$v.$reset()
-          this.$message('Новый комментарий успешно создан')
+            this.$emit('createdAttachedComment', comment)
+            this.isOpen = false;
+          }
+        } else {
+          const uid = this.uid
+          if(uid) {
+            const comment = await this.$store.dispatch('createAttachedComment', {
+              dateComment: new Date().toJSON(),
+              textComment: this.comment,
+              idCurrentPost: this.idCurrentPost,
+              idCurrentComment: this.idCurrentComment,
+              uid
+            })
 
-          this.$emit('createdAttachedComment', comment)
-          this.isOpen = false;
+            this.comment = ''
+            this.$v.$reset()
+            this.$message('Новый комментарий успешно создан')
+
+            this.$emit('createdAttachedComment', comment)
+            this.isOpen = false;
+          }
         }
       } catch(e) {}
     }
