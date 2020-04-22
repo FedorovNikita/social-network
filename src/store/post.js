@@ -3,17 +3,22 @@ import firebase from 'firebase/app'
 export default {
   state: {
     post: {
-      urlImg: ''
+      urlImg: '',
+      urlVideo: ''
     }
   },
   mutations: {
     clearPost(state) {
       state.post = {
-        urlImg: ''
+        urlImg: '',
+        urlVideo: ''
       }
     },
     setPostSrc(state, src) {
       state.post.urlImg = src
+    },
+    setPostVideo(state, url) {
+      state.post.urlVideo = url
     }
   },
   actions: {
@@ -47,7 +52,15 @@ export default {
       try {
         const idAuthor = await dispatch('getUid')
         const srcImg = await getters.post.urlImg
-        if(srcImg) {
+        const srcVideo = await getters.post.urlVideo
+
+        if(srcImg && srcVideo) {
+          const post = await firebase.database().ref(`users/${uid}/posts`).push({datePost, description, idAuthor, srcImg: srcImg, srcVideo: srcVideo})
+          return { datePost, description, id: post.key, idAuthor, srcImg: srcImg, srcVideo: srcVideo }
+        } else if(srcVideo) {
+          const post = await firebase.database().ref(`users/${uid}/posts`).push({datePost, description, idAuthor, srcVideo: srcVideo})
+          return { datePost, description, id: post.key, idAuthor, srcVideo: srcVideo }
+        } else if(srcImg) {
           const post = await firebase.database().ref(`users/${uid}/posts`).push({datePost, description, idAuthor, srcImg: srcImg})
           return { datePost, description, id: post.key, idAuthor, srcImg: srcImg }
         } else {
