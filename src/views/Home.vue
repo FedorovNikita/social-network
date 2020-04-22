@@ -2,8 +2,8 @@
   div
     .page-title.container-component
       h3 Моя лента
-    div(v-for="post in posts")
-      PostNews(v-for="p in post.slice().reverse()" :key="p.id"  :post="p")
+    
+    PostNews(v-for="p in posts.slice().reverse()" :key="p.id"  :post="p")
 
 </template>
 
@@ -11,9 +11,11 @@
 <script>
 import firebase from 'firebase/app'
 import PostNews from '@/components/news/PostNews'
+import Post from '@/components/Post'
 
 export default {
   data: () => ({
+    post: [],
     posts: []
   }),
   async mounted() {
@@ -23,10 +25,19 @@ export default {
       const postsUser = (await firebase.database().ref(`/users/${allUserId[i]}/posts`).once('value')).val()
       if(postsUser) {
         const userPostsArr = Object.keys(postsUser).map(key => ({...postsUser[key], id: key, uid: allUserId[i]}))
-        this.posts.push(userPostsArr)
+        this.post.push(userPostsArr)
       }
     }
-    // console.log(this.posts)
+    
+    let testArr = []
+    for(let i = 0; i < this.post.length; i++) {
+      for(let j = 0; j < this.post[i].length; j++) {
+        testArr.push(this.post[i][j])
+      }
+    }
+    this.posts = testArr
+    let sortArr = this.posts.sort((a, b) => a.datePost > b.datePost ? 1 : -1 )
+
   },
   components: {
     PostNews

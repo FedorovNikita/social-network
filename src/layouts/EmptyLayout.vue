@@ -2,17 +2,7 @@
   .bg-empty
     .container.empty-layout
       .posts
-        //- ul.posts__list
-        //-   li.posts__item
-        //-     //- img.posts__image(src="@/assets/img/mn.jpg" alt="")
-        //-     h3.posts__title Title
-        //-     p.posts__text Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos ipsa, dolores laboriosam soluta repellendus numquam molestiae dicta possimus fugit rerum?
-        //-   li.posts__item
-        //-     //- img.posts__image(src="@/assets/img/mn.jpg" alt="")
-        //-     h3.posts__title Title
-        //-     p.posts__text Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos ipsa, dolores laboriosam soluta repellendus numquam molestiae dicta possimus fugit rerum?
-        div(v-for="post in posts")
-          PostNews(v-for="p in post.slice().reverse()" :key="p.id"  :post="p")
+        PostNews(v-for="p in posts.slice().reverse()" :key="p.id"  :post="p")
       router-view
 </template>
 
@@ -23,6 +13,7 @@ import PostNews from '@/components/news/PostNews'
 
 export default {
   data: () => ({
+    post: [],
     posts: []
   }),
   computed: {
@@ -37,10 +28,19 @@ export default {
       const postsUser = (await firebase.database().ref(`/users/${allUserId[i]}/posts`).once('value')).val()
       if(postsUser) {
         const userPostsArr = Object.keys(postsUser).map(key => ({...postsUser[key], id: key, uid: allUserId[i]}))
-        this.posts.push(userPostsArr)
+        this.post.push(userPostsArr)
       }
     }
-    // console.log(this.posts)
+    
+    let testArr = []
+    for(let i = 0; i < this.post.length; i++) {
+      for(let j = 0; j < this.post[i].length; j++) {
+        testArr.push(this.post[i][j])
+      }
+    }
+    this.posts = testArr
+    let sortArr = this.posts.sort((a, b) => a.datePost > b.datePost ? 1 : -1 )
+
   },
   watch: {
     error(fbError) {
