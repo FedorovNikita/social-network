@@ -3,7 +3,8 @@
     .page-title.container-component
       h3 Моя лента
     
-    PostNews(v-for="p in posts.slice().reverse()" :key="p.id"  :post="p")
+    Loader(v-if="loading")
+    PostNews(v-else v-for="p in posts.slice().reverse()" :key="p.id"  :post="p")
 
 </template>
 
@@ -16,7 +17,8 @@ import Post from '@/components/Post'
 export default {
   data: () => ({
     post: [],
-    posts: []
+    posts: [],
+    loading: true
   }),
   async mounted() {
     const allUser = (await firebase.database().ref(`/users`).once('value')).val()
@@ -37,7 +39,7 @@ export default {
     }
     this.posts = testArr
     let sortArr = this.posts.sort((a, b) => a.datePost > b.datePost ? 1 : -1 )
-
+    this.loading = false
   },
   components: {
     PostNews
