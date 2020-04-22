@@ -16,10 +16,12 @@ export default {
     }
   },
   actions: {
-    sendFile({commit, dispatch, getters}, file) {
-      let storageRef = firebase.storage().ref('userImages/' + file.name);
+    async sendFile({commit, dispatch, getters}, file) {
+      const uid = await dispatch('getUid')
+      const ts = uid + 'date' + Date.parse(new Date())
+      let storageRef = firebase.storage().ref('userImages/' + (file.name + ts));
       let uploadTask = storageRef.put(file);
-
+      
       uploadTask.on('state_changed', 
         function(snapshot){}, 
         function(error) {}, 

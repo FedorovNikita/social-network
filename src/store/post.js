@@ -17,8 +17,10 @@ export default {
     }
   },
   actions: {
-    sendPostFile({commit, dispatch, getters}, file) {
-      let storageRef = firebase.storage().ref('postImages/' + file.name);
+    async sendPostFile({commit, dispatch, getters}, file) {
+      const uid = await dispatch('getUid')
+      const ts = uid + 'date' + Date.parse(new Date())
+      let storageRef = firebase.storage().ref('postImages/' + (file.name + ts));
       let uploadTask = storageRef.put(file);
 
       uploadTask.on('state_changed', 
