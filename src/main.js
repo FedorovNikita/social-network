@@ -8,7 +8,10 @@ import dateFilter from '@/filters/date.filter'
 import localizeFilter from '@/filters/localize.filter'
 
 import messagePlugin from '@/utils/message.plugin'
+import titlePlugin from '@/utils/title.plugin'
+
 import Loader from "@/components/app/Loader"
+import VueMeta from 'vue-meta'
 
 import './registerServiceWorker'
 import 'materialize-css/dist/js/materialize.min'
@@ -21,7 +24,9 @@ import 'firebase/storage'
 Vue.config.productionTip = false
 
 Vue.use(messagePlugin)
+Vue.use(titlePlugin)
 Vue.use(Vuelidate)
+Vue.use(VueMeta)
 
 Vue.filter('date', dateFilter)
 Vue.filter('localize', localizeFilter)

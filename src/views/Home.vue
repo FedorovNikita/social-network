@@ -20,6 +20,11 @@ export default {
     posts: [],
     loading: true
   }),
+  metaInfo() {
+    return {
+      title: this.$title('Menu_news')
+    }
+  },
   async mounted() {
     const allUser = (await firebase.database().ref(`/users`).once('value')).val()
     const allUserId = Object.keys(allUser)

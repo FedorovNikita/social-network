@@ -11,6 +11,11 @@ export default {
   data: () => ({
     users: [] 
   }),
+  metaInfo() {
+    return {
+      title: this.$title('Menu_users')
+    }
+  },
   async mounted() {
     const allUser = (await firebase.database().ref(`/users`).once('value')).val()
     const allUserId = Object.keys(allUser).map(key => ({...allUser[key], id: key}))

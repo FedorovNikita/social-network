@@ -61,6 +61,11 @@ import localizeFilter from '@/filters/localize.filter'
 
 export default {
   name: 'settings',
+  metaInfo() {
+    return {
+      title: this.$title('edit')
+    }
+  },
   data: () => ({
     firstName: '',
     lastName: '',

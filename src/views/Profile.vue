@@ -21,9 +21,15 @@
 <script>
 import CreatePost from '@/components/CreatePost'
 import Post from '@/components/Post'
+import localizeFilter from '@/filters/localize.filter'
 
 export default {
   name: 'Home',
+  metaInfo() {
+    return {
+      title: this.$title('Profile')
+    }
+  },
   data: () => ({
     posts: [],
     userInfo: [],
