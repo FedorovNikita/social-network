@@ -5,7 +5,7 @@
       Navbar
 
       .main-layout__wrapper.container
-        Sidebar
+        Sidebar(:key="locale")
 
         main.main-content
           router-view
@@ -32,9 +32,15 @@ export default {
   computed: {
     error() {
       return this.$store.getters.error
+    },
+    locale() {
+      return this.$store.getters.info.locale
     }
   },
   watch: {
+    // locale() {
+    //   console.log('locale changed')
+    // },
     error(fbError) {
       this.$error(messages[fbError.code] || 'Что-то пошло не так')
     }

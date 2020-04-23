@@ -5,6 +5,7 @@ import router from './router'
 import store from './store'
 
 import dateFilter from '@/filters/date.filter'
+import localizeFilter from '@/filters/localize.filter'
 
 import messagePlugin from '@/utils/message.plugin'
 import Loader from "@/components/app/Loader"
@@ -23,6 +24,7 @@ Vue.use(messagePlugin)
 Vue.use(Vuelidate)
 
 Vue.filter('date', dateFilter)
+Vue.filter('localize', localizeFilter)
 
 Vue.component('Loader', Loader)
 

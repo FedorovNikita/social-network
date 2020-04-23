@@ -1,7 +1,7 @@
 <template lang="pug">
   div
     .page-title.container-component
-      h3 Моя лента
+      h3 {{ 'News' | localize }}
     
     Loader(v-if="loading")
     PostNews(v-else v-for="p in posts.slice().reverse()" :key="p.id"  :post="p")

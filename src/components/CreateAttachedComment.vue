@@ -1,29 +1,30 @@
 <template lang="pug">
   div
-    a.comment__link(href="#" @click.prevent="isOpen = !isOpen") Ответить
+    a.comment__link(href="#" @click.prevent="isOpen = !isOpen") {{ 'Reply' | localize }}
 
     form.comment__attached(@submit.prevent="submitHandler" v-if="isOpen")
       .input-field
         textarea.materialize-textarea(
           v-model="comment" 
           id="commentAttached" )
-        label(for="commentAttached") Написать комментарий...
+        label(for="commentAttached") {{ 'send_comment' | localize }}
         
         small.helper-text.invalid(
           v-if="$v.comment.$dirty && !$v.comment.required")
-          | Поле не должно быть пустым
+          | {{ 'Message_FieldEmpty' | localize }}
         small.helper-text.invalid( 
           v-else-if="$v.comment.$dirty && !$v.comment.maxLength")
-          | Слишком много символов
+          | {{ 'Message_ToManySymbols' | localize }}
       
       div
-        button.btn.waves-effect.waves-light.auth__submit(type="submit") Отправить
+        button.btn.waves-effect.waves-light.auth__submit(type="submit") {{ 'send' | localize }}
           i.material-icons.right send
 </template>
 
 
 <script>
 import { required, maxLength } from 'vuelidate/lib/validators'
+import localizeFilter from '@/filters/localize.filter'
 
 export default {
   props: ['idCurrentComment', 'idCurrentPost', 'uid'],
@@ -54,7 +55,7 @@ export default {
 
             this.comment = ''
             this.$v.$reset()
-            this.$message('Новый комментарий успешно создан')
+            this.$message(localizeFilter('Comment_HasBeenCreated'))
 
             this.$emit('createdAttachedComment', comment)
             this.isOpen = false;
@@ -72,7 +73,7 @@ export default {
 
             this.comment = ''
             this.$v.$reset()
-            this.$message('Новый комментарий успешно создан')
+            this.$message(localizeFilter('Comment_HasBeenCreated'))
 
             this.$emit('createdAttachedComment', comment)
             this.isOpen = false;

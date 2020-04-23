@@ -13,11 +13,13 @@
 
 
 <script>
+import localizeFilter from '@/filters/localize.filter'
+
 export default {
   data: () => ({
     links: [
-      {title: 'Новости', url: '/', exact: true},
-      {title: 'Пользователи', url: '/users'},
+      {title: localizeFilter('Menu_news'), url: '/', exact: true},
+      {title: localizeFilter('Menu_users'), url: '/users'},
     ],
     linksCount: true
   }),
@@ -26,7 +28,7 @@ export default {
       const uid = this.$store.getters.info.uid
       if(uid && this.linksCount) {
         const newLink = {
-          title: 'Моя страница',
+          title: localizeFilter('Menu_profile'),
           url: `/profile/${uid}`
         }
         this.links.unshift(newLink)

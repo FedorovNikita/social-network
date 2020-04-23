@@ -6,36 +6,37 @@
           v-model="description" 
           id="description"
           @click="btnIsOpen = true")
-        label(for="description") Что у Вас нового?
+        label(for="description") {{ 'WhatsNews' | localize }}
         span.character-counter( 
           style="float: right; font-size: 12px;") {{ description.length }}/{{ $v.description.$params.maxLength.max }}
         small.helper-text.invalid(
           v-if="$v.description.$dirty && !$v.description.required")
-          | Поле не должно быть пустым
+          | {{ 'Message_FieldEmpty' | localize }}
         small.helper-text.invalid( 
           v-else-if="$v.description.$dirty && !$v.description.maxLength")
-          | Слишком много символов
+          | {{ 'Message_ToManySymbols' | localize }}
 
       <iframe v-if="videoIsOpen" width="100%" height="400" :src="getSrcVideo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       
       .input-field.post__user-photo(v-if="btnIsOpen")
         .input-field.link-video
           input(v-model="video" id="first_name" type="text" class="validate" @mouseleave="handleVideoUpload")
-          label(for="first_name") Ссылка на видео Youtube
+          label(for="first_name") {{ 'LinkYoutube' | localize }}
         div
           img(:src="getSrc")
         .file-field.input-field.post__btn-wrap
           .file-path-wrapper
             input.file-path.validate(type="text")
           .btn.post__submit
-            span Добавить картинку
+            span {{ 'AddAnImage' | localize }}
             input(type="file" @change="handleFileUpload" accept="image/{png, jpg, webp}")
-          button.btn.waves-effect.waves-light.post__submit(type="submit") Опубликовать
+          button.btn.waves-effect.waves-light.post__submit(type="submit") {{ 'Post' | localize }}
             i.material-icons.right send
 </template>
 
 <script>
 import { required, maxLength } from 'vuelidate/lib/validators'
+import localizeFilter from '@/filters/localize.filter'
 
 export default {
   data: () => ({
@@ -80,7 +81,7 @@ export default {
           this.$v.$reset()
           this.$refs.form.reset()
           this.$store.commit('clearPost')
-          this.$message('Новый пост успешно создан')
+          this.$message(localizeFilter('Post_HasBeenCreated'))
           this.$emit('created', post)
           this.btnIsOpen = false
           this.videoIsOpen = false

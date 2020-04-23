@@ -7,7 +7,7 @@
         h3.user-info__name {{ userInfo.firstName }} {{ userInfo.lastName }}
         table
           tr.user-info__table-row
-            td.user-info__first-column.user-info__date День рождения:
+            td.user-info__first-column.user-info__date {{ 'dateBirth' | localize }}
             td.user-info__date {{ userInfo.dateBirth | date('date') }}
 
     CreatePost(@created="addNewPost")

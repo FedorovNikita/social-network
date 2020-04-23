@@ -4,22 +4,23 @@
       textarea.materialize-textarea(
         v-model="comment" 
         id="comment" )
-      label(for="comment") Написать комментарий...
+      label(for="comment") {{ 'send_comment' | localize }}
       
       small.helper-text.invalid(
         v-if="$v.comment.$dirty && !$v.comment.required")
-        | Поле не должно быть пустым
+        | {{ 'Message_FieldEmpty' | localize }}
       small.helper-text.invalid( 
         v-else-if="$v.comment.$dirty && !$v.comment.maxLength")
-        | Слишком много символов
+        | {{ 'Message_ToManySymbols' | localize }}
     
     div
-      button.btn.waves-effect.waves-light.auth__submit(type="submit") Отправить новый коммент
+      button.btn.waves-effect.waves-light.auth__submit(type="submit") {{ 'SendNewComment' | localize }}
         i.material-icons.right send
 </template>
 
 <script>
 import { required, maxLength } from 'vuelidate/lib/validators'
+import localizeFilter from '@/filters/localize.filter'
 
 export default {
   props: ['currentPost', 'uid'],
@@ -48,7 +49,7 @@ export default {
 
             this.comment = ''
             this.$v.$reset()
-            this.$message('Новый комментарий успешно создан')
+            this.$message(localizeFilter('Comment_HasBeenCreated'))
 
             this.$emit('createdComment', comment)
           }
@@ -64,7 +65,7 @@ export default {
 
             this.comment = ''
             this.$v.$reset()
-            this.$message('Новый комментарий успешно создан')
+            this.$message(localizeFilter('Comment_HasBeenCreated'))
 
             this.$emit('createdComment', comment)
           }

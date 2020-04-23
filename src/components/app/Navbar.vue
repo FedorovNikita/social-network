@@ -21,14 +21,14 @@
             li
               router-link.black-text(to="/settings")
                 i.material-icons.navbar__icon edit
-                | Редактировать
+                | {{ 'edit' | localize }}
             li.divider(tabindex="-1")
             li
               a.black-text(
                 href="#" 
                 @click.prevent="logout")
                 i.material-icons.navbar__icon assignment_return
-                | Выйти
+                | {{ 'logout' | localize }}
 </template>
 
 
