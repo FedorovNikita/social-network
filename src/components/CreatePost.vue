@@ -17,10 +17,6 @@
           | Слишком много символов
 
       <iframe v-if="videoIsOpen" width="100%" height="400" :src="getSrcVideo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-      //- .input-field
-      //-   input(v-model="video" id="first_name" type="text" class="validate" @mouseleave="handleVideoUpload")
-      //-   label(for="first_name") Ссылка на видео Youtube 
       
       .input-field.post__user-photo(v-if="btnIsOpen")
         .input-field.link-video
