@@ -60,6 +60,10 @@ $font-color: #2e2829;
   color: #ff0000 !important;
 }
 
+.link-video {
+  width: 100%;
+}
+
 @import 'scaffolding';
 @import 'components/loader';
 @import 'components/auth';

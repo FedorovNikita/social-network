@@ -21,13 +21,10 @@ export default {
   name: 'main-layout',
   data: () => ({
     loading: true,
-    // uid: ''
   }),
   async mounted() {
     if(!Object.keys(this.$store.getters.info).length) {
       const infoUid = await this.$store.dispatch('fetchInfo')
-      // this.uid = infoUid
-      // console.log(this.uid)
     }
 
     this.loading = false
