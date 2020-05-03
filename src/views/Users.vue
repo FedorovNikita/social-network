@@ -8,6 +8,7 @@ import firebase from 'firebase/app'
 import User from '@/components/User'
 
 export default {
+  name: 'users',
   data: () => ({
     users: [] 
   }),

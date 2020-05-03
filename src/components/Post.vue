@@ -3,7 +3,8 @@
     .post__info-author
       img.post__user-img(:src="userInfo.urlImg")
       div
-        h4.post__title {{userInfo.firstName}} {{userInfo.lastName}}
+        router-link(:to="`/profile/${userInfo.uid}`")
+          h4.post__title {{userInfo.firstName}} {{userInfo.lastName}}
         span.post__date {{new Date(post.datePost) | date('datetime')}}
     p.post__description {{post.description}}
     img(:src="post.srcImg")

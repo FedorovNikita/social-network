@@ -15,6 +15,7 @@ import PostNews from '@/components/news/PostNews'
 import Post from '@/components/Post'
 
 export default {
+  name: 'Home',
   data: () => ({
     post: [],
     posts: [],

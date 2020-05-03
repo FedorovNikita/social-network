@@ -24,7 +24,7 @@ import Post from '@/components/Post'
 import localizeFilter from '@/filters/localize.filter'
 
 export default {
-  name: 'Home',
+  name: 'profile',
   metaInfo() {
     return {
       title: this.$title('Profile')
