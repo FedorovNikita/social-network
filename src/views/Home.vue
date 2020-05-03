@@ -18,7 +18,6 @@ import Post from '@/components/Post'
 export default {
   name: 'Home',
   data: () => ({
-    post: [],
     posts: [],
     loading: true
   }),
@@ -29,24 +28,18 @@ export default {
   },
   async mounted() {
     const allUser = (await firebase.database().ref(`/users`).once('value')).val()
-    const allUserId = Object.keys(allUser)
-    for(let i = 0; i < allUserId.length; i++) {
-      const postsUser = (await firebase.database().ref(`/users/${allUserId[i]}/posts`).once('value')).val()
-      if(postsUser) {
-        const userPostsArr = Object.keys(postsUser).map(key => ({...postsUser[key], id: key, uid: allUserId[i]}))
-        this.post.push(userPostsArr)
-      }
-    }
+    const allUserArr = Object.keys(allUser).map(key => ({...allUser[key], id: key}))
     
-    let testArr = []
-    for(let i = 0; i < this.post.length; i++) {
-      for(let j = 0; j < this.post[i].length; j++) {
-        testArr.push(this.post[i][j])
+    for(let i = 0; i < allUserArr.length; i++) {
+      
+      const postsArr = Object.keys(allUserArr[i].posts).map(key => ({...allUserArr[i].posts[key], id: key, uid: allUserArr[i].id}))
+
+      for(let j = 0; j < postsArr.length; j++) {
+        this.posts.push(postsArr[j])
       }
     }
-    this.posts = testArr
-    this.posts.sort((a, b) => a.datePost > b.datePost ? 1 : -1 )
 
+    this.posts.sort((a, b) => a.datePost > b.datePost ? 1 : -1 )
     this.loading = false
   },
   components: {
