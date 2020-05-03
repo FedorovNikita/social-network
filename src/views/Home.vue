@@ -4,14 +4,15 @@
       h3 {{ 'News' | localize }}
     
     Loader(v-if="loading")
-    PostNews(v-else v-for="p in posts.slice().reverse()" :key="p.id"  :post="p")
+    div(v-else)
+      Post(v-for="post in posts.slice().reverse()" :key="post.id"  :post="post")
+
 
 </template>
 
 
 <script>
 import firebase from 'firebase/app'
-import PostNews from '@/components/news/PostNews'
 import Post from '@/components/Post'
 
 export default {
@@ -44,11 +45,12 @@ export default {
       }
     }
     this.posts = testArr
-    let sortArr = this.posts.sort((a, b) => a.datePost > b.datePost ? 1 : -1 )
+    this.posts.sort((a, b) => a.datePost > b.datePost ? 1 : -1 )
+
     this.loading = false
   },
   components: {
-    PostNews
+    Post
   },
 }
 </script>

@@ -9,5 +9,8 @@
 <script>
 export default {
   props: ['user'],
+  mounted() {
+    // console.log(this.user.info.urlImg)
+  }
 }
 </script>

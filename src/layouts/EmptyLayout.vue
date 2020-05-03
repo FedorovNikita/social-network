@@ -2,14 +2,14 @@
   .bg-empty
     .container.empty-layout
       .posts
-        PostNews(v-for="p in posts.slice().reverse()" :key="p.id"  :post="p")
+        Post(v-for="p in posts.slice().reverse()" :key="p.id"  :post="p")
       router-view
 </template>
 
 <script>
 import firebase from 'firebase/app'
 import messages from '@/utils/messages'
-import PostNews from '@/components/news/PostNews'
+import Post from '@/components/Post'
 
 export default {
   data: () => ({
@@ -48,7 +48,7 @@ export default {
     }
   },
   components: {
-    PostNews
+    Post
   },
 }
 </script>
