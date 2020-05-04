@@ -63,19 +63,11 @@ export default {
     this.userInfo = await this.$store.dispatch('fetchUser', {
       idUser: this.post.idAuthor
     })
-    // console.log(this.userInfo)
-    if(this.$route.params.id) {
-      this.comments = await this.$store.dispatch('fetchComments', {
-        idCurrentPost: this.post.id,
-        uid: this.$route.params.id
-      })
-    } else {
-      this.comments = await this.$store.dispatch('fetchComments', {
-        idCurrentPost: this.post.id,
-        uid: this.post.uid
-      })
+    
+    if(this.post.comments) {
+      this.comments = Object.keys(this.post.comments).map(key => ({...this.post.comments[key], id: key, idCurrentPost: this.post.id}))
     }
-
+  
   },
   methods: {
     addNewComment(comment) {
