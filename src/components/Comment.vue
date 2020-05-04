@@ -59,18 +59,8 @@ export default {
       idUser: this.comment.idAuthor
     })
 
-    if(this.uid) {
-      this.attachedComments = await this.$store.dispatch('fetchAttachedComments', {  
-        idCurrentPost: this.comment.idCurrentPost, 
-        idCurrentComment: this.comment.id,
-        uid: this.uid,
-      })
-    } else {
-      this.attachedComments = await this.$store.dispatch('fetchAttachedComments', {  
-        idCurrentPost: this.comment.idCurrentPost, 
-        idCurrentComment: this.comment.id,
-        uid: this.$route.params.id,
-      })
+    if(this.comment.attachedComments) {
+      this.attachedComments = Object.keys(this.comment.attachedComments).map(key => ({...this.comment.attachedComments[key], id: key, idCurrentPost: this.comment.idCurrentPost, idCurrentComment: this.comment.id}))
     }
 
     this.loading = false
