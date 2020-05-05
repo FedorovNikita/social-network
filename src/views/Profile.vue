@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    div.user-info
+    div.user-info(:val="getUid")
       .container-component.user-info__image
         img(:src="userInfo.urlImg")
       .container-component.user-info__desc
@@ -50,6 +50,18 @@ export default {
   methods: {
     addNewPost(post) {
       this.posts.push(post)
+    }
+  },
+  computed: {
+    async getUid() {
+      if (this.$route.params.id !== this.userInfo.uid ) {
+        this.userInfo = await this.$store.dispatch('fetchUser', {
+          idUser: this.$route.params.id
+        })
+        this.posts = await this.$store.dispatch('fetchPosts', {
+          uid: this.$route.params.id
+        })
+      }
     }
   }
 }

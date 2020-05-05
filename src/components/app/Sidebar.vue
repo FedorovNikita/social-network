@@ -22,12 +22,11 @@ export default {
       {title: localizeFilter('Menu_profile'), urlName: 'profile'},
       {title: localizeFilter('Menu_users'), urlName: 'users'}
     ],
-    linksCount: true
   }),
   computed: {
     getUid() {
       return this.$store.getters.info.uid
     }
-  }
+  },
 }
 </script>
