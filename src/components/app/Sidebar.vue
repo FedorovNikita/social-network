@@ -9,7 +9,6 @@
       :to="{ name: link.urlName, params:{ id: getUid }}"
       :exact="link.exact")
       a.waves-effect.waves-green.sidebar__link(href="#") {{ link.title }}
-      a {{getUid}}
 </template>
 
 
